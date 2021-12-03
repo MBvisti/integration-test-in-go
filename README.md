@@ -1,6 +1,6 @@
 # Integration testing in Go
 This repository is the basis for the article: How to do integration test in Go 
-(found [here(https://blog.mortenvistisen.com/how-to-do-integration-tests-in-go)].
+(found [here](https://blog.mortenvistisen.com/how-to-do-integration-tests-in-go).
 
 The article only focus on how to do integration tests and therefore does not
 provide any in-depth explanation of the code structure or any way to expose
