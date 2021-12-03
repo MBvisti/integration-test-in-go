@@ -1,34 +1,38 @@
-version: "3.2"
+version: "3.8"
 services:
-  database:
-    image: postgres:14
-    container_name: weight_tracker_db_psql
-    environment:
-      POSTGRES_PASSWORD: password
-        POSTGRES_USER: user
-          POSTGRES_DB: weight_tracker_database
-    volumes:
-      pgdata:/var/lib/postgresql/data
+    database:
+        image: postgres:13
+        container_name: weight_tracker_db_psql
+        environment:
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_USER=admin
+            - POSTGRES_DB=weight_tracker_database
+        ports:
+            - "5436:5432" # we are mapping the port 5436 on the local machine
+              # to the image running inside the container
+        volumes:
+            - pgdata:/var/lib/postgresql/data
 
-  app:
-    container_name: weight_tracker_app
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    working_dir: /app
-      - ./:/app
-      - go-modules:/go
-    environment:
-      - DB_NAME=${DB_NAME}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - DB_USERNAME=${DB_USERNAME}
-    depends_on:
-      database
+    app:
+        container_name: weight_tracker_app
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        ports:
+            - "8080:8080"
+        working_dir: /app
+        volumes:
+            - ./:/app
+            - go-modules:/go
+        environment:
+            - DB_NAME=${DB_NAME}
+            - DB_PASSWORD=${DB_PASSWORD}
+            - DB_HOST=${DB_HOST}
+            - DB_PORT=${DB_PORT}
+            - DB_USERNAME=${DB_USERNAME}
+        depends_on:
+            - database
 
 volumes:
-  pgdata:
-  go-modules:
+    pgdata:
+    go-modules:

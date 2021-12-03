@@ -3,6 +3,7 @@ package psql
 import (
 	"errors"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 
@@ -29,15 +30,22 @@ func NewStorage() *Storage {
 	databaseName := os.Getenv("DB_NAME")
 	databasePassword := os.Getenv("DB_PASSWORD")
 	connectionString := fmt.Sprintf("host=%s port=%d user=%s password=%s"+
-		"dbname=%s sslmode=disable",
+		" "+"dbname=%s sslmode=disable",
 		databaseHost, databasePort, databaseUsername, databasePassword,
 		databaseName,
 	)
 
 	db, err := sqlx.Connect("postgres", connectionString)
 	if err != nil {
+		log.Printf("this is err: %+v", err)
 		panic(errors.New("could not setup storage"))
 	}
+	log.Print("ping")
+	err = db.Ping()
+	if err != nil {
+		panic(errors.New("could not ping db"))
+	}
+	log.Print("pong")
 	return &Storage{
 		db: db,
 	}

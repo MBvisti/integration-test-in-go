@@ -15,5 +15,8 @@ func main() {
 	userService := service.NewUser(storage)
 	weightService := service.NewWeight(storage)
 
-	log.Printf("services running: %v - %v", userService, weightService)
+	// services aren't really running - this is just done to shut up the
+	// compiler. We don't really need them but leaving them here for
+	// illustration
+	log.Printf("service running: %v - %v", userService, weightService)
 }
