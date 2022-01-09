@@ -1,11 +1,14 @@
-FROM golang:1-alpine
+FROM golang:1-alpine AS base
+WORKDIR /app
 
 RUN apk add --no-cache git gcc musl-dev
 
-# this gives us some nice colors when running our tests so its a bit
-# easier to locate the failing and passing tests
-RUN go get -u github.com/rakyll/gotest
+FROM base AS dev
 
-RUN go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+RUN go get github.com/cosmtrek/air
+RUN go get github.com/vektra/mockery/v2/.../
 
-WORKDIR /app
+COPY .air.toml .
+
+CMD ["air"]
+

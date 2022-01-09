@@ -26,7 +26,7 @@ func NewConfig() *Config {
 }
 
 func (c *Config) GetDatabaseConnString() string {
-	return c.GetDatabaseConnString()
+	return c.databaseConfig.getConnectionString()
 }
 
 type dbConfig struct {

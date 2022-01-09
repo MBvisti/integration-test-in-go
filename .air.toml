@@ -1,0 +1,27 @@
+# Working directory
+# . or absolute path, please note that the direc
+root = "."
+tmp_dir = "bin"
+      
+[build]
+# Just plain old shell command. You could use `m
+cmd = "go build -o ./bin/main-dev ."
+# Binary file yields from `cmd`.
+bin = "bin/main-dev"
+# Customize binary.
+# Watch these filename extensions.
+include_ext = ["go", "html"]
+# Ignore these filename extensions or directorie
+exclude_dir = ["bin"]
+# Watch these directories if you specified.
+include_dir = []
+# Exclude files.
+exclude_file = [".air.toml"]
+# Exclude specific regular expressions.
+exclude_regex = ["_test.go"]
+# Exclude unchanged files.
+exclude_unchanged = true
+# Follow symlink for directories
+follow_symlink = true
+ NORMAL   feat/implement-hourly-look-up-endpoint <1
+:q                                           y
