@@ -29,6 +29,7 @@ services:
             - DB_PASSWORD=${DB_PASSWORD}
             - DB_HOST=${DB_HOST}
             - DB_PORT=${DB_PORT}
+            - SERVER_PORT=${SERVER_PORT}
             - DB_USERNAME=${DB_USERNAME}
             - ENVIRONMENT=test
         depends_on:
