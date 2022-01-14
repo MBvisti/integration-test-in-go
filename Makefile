@@ -1,5 +1,6 @@
 up:
-	docker-compose --env-file .env up --remove-orphans --build
+	docker-compose -f docker-compose.yaml --env-file .env up \
+	--remove-orphans --build
 	
 down:
 	docker-compose down -v --remove-orphans && docker volume prune -f

@@ -31,6 +31,7 @@ services:
             - DB_HOST=${DB_HOST}
             - DB_PORT=${DB_PORT}
             - DB_USERNAME=${DB_USERNAME}
+            - SERVER_PORT=${SERVER_PORT}
             - ENVIRONMENT=${ENVIRONMENT}
         depends_on:
             - database

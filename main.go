@@ -1,13 +1,14 @@
 package main
 
 import (
-	"log"
-
+	"github.com/mbvisti/integration-test-in-go/config"
 	"github.com/mbvisti/integration-test-in-go/repository/psql"
+	"github.com/mbvisti/integration-test-in-go/server/http"
 	"github.com/mbvisti/integration-test-in-go/service"
 )
 
 func main() {
+	cfg := config.NewConfig()
 	storage := psql.NewStorage()
 
 	// these would then be passed to some handler in whatever way we choose
@@ -15,8 +16,9 @@ func main() {
 	userService := service.NewUser(storage)
 	weightService := service.NewWeight(storage)
 
-	// services aren't really running - this is just done to shut up the
-	// compiler. We don't really need them but leaving them here for
-	// illustration
-	log.Printf("service running: %v - %v", userService, weightService)
+	userHandler := http.NewUserHandler(userService)
+	weightHandler := http.NewWeightHandler(weightService)
+
+	srv := http.NewHttp(cfg, *userHandler, *weightHandler)
+	srv.Start()
 }
