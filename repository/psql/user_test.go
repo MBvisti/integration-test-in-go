@@ -34,9 +34,6 @@ func TestIntegration_CreateUser(t *testing.T) {
 			return
 		}
 
-		// to ensure consistency we could consider adding in a static date
-		// i.e. time.Date(insert-fixed-date-here)
-		// creationTime := time.Now()
 		err = storage.CreateUser(*newUser)
 		// assert there is no err
 		if err != nil {

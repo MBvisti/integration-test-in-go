@@ -1,5 +1,5 @@
-CREATE TABLE IF NOT EXISTS "user"(
-    id serial PRIMARY KEY,
+CREATE TABLE "users" (
+    id SERIAL PRIMARY KEY,
     created_at      timestamp with time zone default now() not null,
     updated_at      timestamp with time zone,
     name varchar(255) not null,

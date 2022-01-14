@@ -1,13 +1,11 @@
 package service
 
 import (
-	"time"
-
 	"github.com/mbvisti/integration-test-in-go/entity"
 )
 
 type userStorage interface {
-	CreateUser(newUser entity.User, createdAt time.Time) error
+	CreateUser(newUser entity.User) error
 }
 
 type User struct {
@@ -28,5 +26,5 @@ func (u User) New(name, sex, weightGoal, email string, age, height,
 		return err
 	}
 
-	return u.repo.CreateUser(*newUser, time.Now())
+	return u.repo.CreateUser(*newUser)
 }
