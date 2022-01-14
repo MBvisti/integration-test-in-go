@@ -51,7 +51,6 @@ type dbConfig struct {
 	password string
 	host     string
 	name     string
-	driver   string
 	port     int64
 }
 
@@ -63,17 +62,26 @@ func newDbConfig(env string) (*dbConfig, error) {
 		return nil, errors.New("could not convert db port to int")
 	}
 	databaseHost := os.Getenv("DB_HOST")
+	if databaseHost == "" {
+		return nil, errors.New("databaseHost was empty")
+	}
 	databaseUsername := os.Getenv("DB_USERNAME")
+	if databaseUsername == "" {
+		return nil, errors.New("databaseUsername was empty")
+	}
 	databaseName := os.Getenv("DB_NAME")
+	if databaseName == "" {
+		return nil, errors.New("databaseName was empty")
+	}
 	databasePassword := os.Getenv("DB_PASSWORD")
-	databaseDriver := os.Getenv("DB_DRIVER")
-
+	if databasePassword == "" {
+		return nil, errors.New("databasePassword was empty")
+	}
 	return &dbConfig{
 		user:     databaseUsername,
 		password: databasePassword,
 		host:     databaseHost,
 		name:     databaseName,
-		driver:   databaseDriver,
 		port:     databasePort,
 	}, nil
 }

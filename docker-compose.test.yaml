@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-    database:
+    test_database:
         image: postgres:13
         container_name: test_weight_tracker_db_psql
         environment:
@@ -13,7 +13,7 @@ services:
         volumes:
             - test-pgdata:/var/lib/postgresql/data
 
-    app:
+    test_app:
         container_name: test_weight_tracker_app
         build:
             context: .
@@ -33,7 +33,7 @@ services:
             - DB_USERNAME=${DB_USERNAME}
             - ENVIRONMENT=test
         depends_on:
-            - database
+            - test_database
 
 volumes:
     test-pgdata:
