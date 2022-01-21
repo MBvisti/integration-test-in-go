@@ -15,7 +15,7 @@ import (
 	"github.com/mbvisti/integration-test-in-go/service"
 )
 
-func TestIntegration_UserHandler_New(t *testing.T) {
+func TestIntegration_UserHandler_CreateUser(t *testing.T) {
 	cfg := config.NewConfig()
 	storage := psql.NewStorage()
 
