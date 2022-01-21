@@ -1,7 +1,6 @@
 package http
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
@@ -36,7 +35,6 @@ func (h *userHandler) CreateUser() fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		req := NewUserRequest{}
 		if err := c.BodyParser(&req); err != nil {
-			log.Print(err)
 			return c.Status(http.StatusBadRequest).
 				SendString("could not parse request body")
 		}

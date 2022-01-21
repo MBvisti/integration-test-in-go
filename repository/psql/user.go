@@ -1,8 +1,6 @@
 package psql
 
 import (
-	"log"
-
 	"github.com/mbvisti/integration-test-in-go/entity"
 	"github.com/pkg/errors"
 )
@@ -18,7 +16,6 @@ func (s Storage) CreateUser(newUser entity.User) error {
 		newUser.WeightGoal,
 	)
 	if err != nil {
-		log.Print(err)
 		return errors.WithStack(err)
 	}
 
