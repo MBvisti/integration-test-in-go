@@ -8,6 +8,7 @@ import (
 	h "net/http"
 	"testing"
 
+	"github.com/golang-migrate/migrate/v4"
 	"github.com/mbvisti/integration-test-in-go/config"
 	"github.com/mbvisti/integration-test-in-go/repository/psql"
 	"github.com/mbvisti/integration-test-in-go/server/http"
@@ -74,4 +75,32 @@ func TestIntegration_UserHandler_New(t *testing.T) {
 	if newUser.Height != req.Height {
 		t.Error(errors.New("create user endpoint did not create user with correct details"))
 	}
+	if newUser.Name != req.Name {
+		t.Error(errors.New("create user endpoint did not create user with correct details"))
+	}
+	if newUser.Sex != req.Sex {
+		t.Error(errors.New("create user endpoint did not create user with correct details"))
+	}
+	if newUser.WeightGoal != req.WeightGoal {
+		t.Error(errors.New("create user endpoint did not create user with correct details"))
+	}
+	if newUser.Email != req.Email {
+		t.Error(errors.New("create user endpoint did not create user with correct details"))
+	}
+	if newUser.Age != req.Age {
+		t.Error(errors.New("create user endpoint did not create user with correct details"))
+	}
+	if newUser.ActivityLevel != req.ActivityLevel {
+		t.Error(errors.New("create user endpoint did not create user with correct details"))
+	}
+
+	t.Cleanup(func() {
+		err := psql.RunDownMigrations(*cfg)
+		if err != nil {
+			if errors.Is(err, migrate.ErrNoChange) {
+				return
+			}
+			t.Errorf("test cleanup failed for: CreateUser endpoint, with err: %v", err)
+		}
+	})
 }

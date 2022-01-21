@@ -76,8 +76,8 @@ func TestIntegration_CreateUser(t *testing.T) {
 
 	})
 
-	// // run some clean up, i.e. clean the database so we have a clean env
-	// // when we run the next test
+	// run some clean up, i.e. clean the database so we have a clean env
+	// when we run the next test
 	t.Cleanup(func() {
 		err := psql.RunDownMigrations(*cfg)
 		if err != nil {
