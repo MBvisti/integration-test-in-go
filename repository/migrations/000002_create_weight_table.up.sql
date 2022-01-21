@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS weight(
     bmr integer not null,
     daily_caloric_intake integer,
     user_id integer not null,
-    FOREIGN KEY (user_id) REFERENCES "user" (id)
+    FOREIGN KEY (user_id) REFERENCES "users" (id)
 );

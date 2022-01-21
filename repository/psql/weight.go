@@ -16,7 +16,7 @@ func (s Storage) CreateWeightEntry(newWeight entity.Weight,
 		INSERT INTO %s 
 			(created_at, weight, user_id, bmr, daily_caloric_intake) 
 		VALUES 
-			($1, $2, $3, $4)
+			($1, $2, $3, $4, $5)
 		`, weightTblName)
 	_, err := s.db.Exec(newWeightStatement, createdAt, newWeight.Weight,
 		newWeight.UserID, newWeight.BMR, newWeight.DailyCaloricIntake)

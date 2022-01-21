@@ -33,7 +33,7 @@ type NewUserRequest struct {
 
 func (h *userHandler) CreateUser() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		var req NewUserRequest
+		req := NewUserRequest{}
 		if err := c.BodyParser(&req); err != nil {
 			return c.Status(http.StatusBadRequest).
 				SendString("could not parse request body")
