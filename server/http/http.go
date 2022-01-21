@@ -35,6 +35,15 @@ func NewHttp(
 	}
 }
 
+func (h *Http) SetupRoutes() {
+	h.Routes()
+}
+
 func (h *Http) Start() error {
+	h.SetupRoutes()
 	return h.router.Listen(fmt.Sprintf(":%d", h.serverPort))
+}
+
+func (h *Http) GetRouter() *fiber.App {
+	return h.router
 }
