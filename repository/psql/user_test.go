@@ -24,11 +24,16 @@ func TestIntegration_CreateUser(t *testing.T) {
 		t.Errorf("test setup failed for: CreateUser, with err: %v", err)
 		return
 	}
+	err = psql.LoadFixtures(*cfg)
+	if err != nil {
+		t.Errorf("test setup failed for: CreateUser, with err: %v", err)
+		return
+	}
 
 	// run the test
 	t.Run("should create a new user", func(t *testing.T) {
 		newUser, err := entity.NewUser(
-			"Jon Snow", "male", "90", "thewhitewolf@stark.com", 16, 182, 1)
+			"Jon Snow", "male", "90", "theyoungwolf@stark.com", 16, 182, 1)
 		if err != nil {
 			t.Errorf("failed to run CreateUser with error: %v", err)
 			return
@@ -50,7 +55,7 @@ func TestIntegration_CreateUser(t *testing.T) {
 		}
 		queryResult := entity.User{}
 		err = db.QueryRow("SELECT id, name, email FROM users WHERE email=$1",
-			"thewhitewolf@stark.com").Scan(
+			"theyoungwolf@stark.com").Scan(
 			&queryResult.ID, &queryResult.Name, &queryResult.Email,
 		)
 		if err != nil {
@@ -68,12 +73,6 @@ func TestIntegration_CreateUser(t *testing.T) {
 				returned value`)
 			return
 		}
-		if int64(queryResult.ID) != int64(1) {
-			t.Error(`failed 'should create a new user' wanted id did not match 
-				returned value`)
-			return
-		}
-
 	})
 
 	// run some clean up, i.e. clean the database so we have a clean env
