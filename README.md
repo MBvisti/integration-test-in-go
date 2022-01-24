@@ -20,6 +20,10 @@ Here's what you'll need:
 When running the testing command (make run-integration-tests) you will auto-
 matically build the image containing everything you need.
 
+## Running the app
+If you want to run the app and make request to the API, simply run "make up"
+and then in another terminal run "make apply-migrations".
+
 ## Gotchas
 This setup is using volumes. I sometimes run into issues where some volumes are
 affecting others. If running make run-integration-tests doesn't work for you,
